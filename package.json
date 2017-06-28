@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "heroku-postbuild": "cd client && rimraf /build && yarn --production=false && yarn run build",
+    "heroku-postbuild": "cd client && rimraf /build && npm --production=false && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
