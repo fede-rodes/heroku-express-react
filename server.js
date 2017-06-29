@@ -1,12 +1,15 @@
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 
 // const generatePassword = require('password-generator');
 import schema from './src/schema';
 
 const server = express();
+
+server.use('*', cors({ origin: 'http://localhost:3000' }));
 
 // Serve static files from the React app
 server.use(express.static(path.join(__dirname, 'client/build')));
