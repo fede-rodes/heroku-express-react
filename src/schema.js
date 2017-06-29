@@ -1,10 +1,7 @@
-import {
-  makeExecutableSchema,
-  addMockFunctionsToSchema,
-} from 'graphql-tools';
+import { makeExecutableSchema } from 'graphql-tools';
+import resolvers from './resolvers';
 
 const typeDefs = `
-
 type Channel {
    id: ID!                # "!" denotes a required field
    name: String
@@ -17,5 +14,5 @@ type Query {
 }
 `;
 
-const schema = makeExecutableSchema({ typeDefs });
-export { schema };
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+export default schema;

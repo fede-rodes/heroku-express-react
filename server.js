@@ -1,15 +1,10 @@
 import express from 'express';
 import path from 'path';
-
-import {
-  graphqlExpress,
-  graphiqlExpress,
-} from 'graphql-server-express';
 import bodyParser from 'body-parser';
+import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 
 // const generatePassword = require('password-generator');
-
-import { schema } from './src/schema';
+import schema from './src/schema';
 
 const server = express();
 
@@ -17,6 +12,8 @@ const server = express();
 server.use(express.static(path.join(__dirname, 'client/build')));
 
 server.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+
+server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 // Put all API endpoints under '/api'
 /* server.get('/api/passwords', (req, res) => {
