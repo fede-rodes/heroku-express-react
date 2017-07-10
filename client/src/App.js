@@ -12,11 +12,9 @@ import {
   createNetworkInterface,
 } from 'react-apollo';
 
-const port = process.env.PORT || 5000;
 const networkInterface = createNetworkInterface({
-  uri: `http://localhost:${port}/graphql`,
+  uri: 'http://localhost:5000/graphql',
 });
-console.log('React app listening at port', port);
 
 const client = new ApolloClient({
   networkInterface,
