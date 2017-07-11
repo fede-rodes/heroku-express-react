@@ -9,17 +9,21 @@ import schema from './src/schema';
 
 const server = express();
 
+server.set('port', (process.env.PORT || 5000));
+
 server.use('*', cors({ origin: 'http://localhost:3000' }));
 
 // Serve static files from the React app
-server.use(express.static(path.join(__dirname, 'client/build')));
+server.use(express.static(__dirname + 'client/build'));
+
+server.get('/', (req, res) => console.log('heloo'));
 
 server.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 
 server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 //
 // Put all API endpoints under '/api'
-server.get('/api/passwords', (req, res) => {
+/* server.get('/api/passwords', (req, res) => {
   const count = 5;
 
   // Generate some passwords
@@ -31,7 +35,7 @@ server.get('/api/passwords', (req, res) => {
   res.json(passwords);
 
   console.log(`Sent ${count} passwords`);
-});
+}); */
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
@@ -39,5 +43,4 @@ server.get('/api/passwords', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/build/index.html'));
 }); */
 
-const port = process.env.PORT || 5000;
-server.listen(port, () => console.log(`GraphQL Server is now running on http://localhost:${port}`));
+server.listen(server.get('port'), () => console.log(`GraphQL Server is now running on http://localhost:${server.get('port')}`));
