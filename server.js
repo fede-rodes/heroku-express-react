@@ -19,7 +19,7 @@ server.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 // Put all API endpoints under '/api'
-/* server.get('/api/passwords', (req, res) => {
+server.get('/api/passwords', (req, res) => {
   const count = 5;
 
   // Generate some passwords
@@ -31,7 +31,7 @@ server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
   res.json(passwords);
 
   console.log(`Sent ${count} passwords`);
-}); */
+});
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
