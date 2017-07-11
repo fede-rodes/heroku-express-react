@@ -29,15 +29,21 @@ var server = (0, _express2.default)();
 // const generatePassword = require('password-generator');
 
 
+server.set('port', process.env.PORT || 5000);
+
 server.use('*', (0, _cors2.default)({ origin: 'http://localhost:3000' }));
 
 // Serve static files from the React app
-server.use(_express2.default.static(_path2.default.join(__dirname, 'client/build')));
+server.use(_express2.default.static(__dirname + 'client/build'));
+
+server.get('/', function (req, res) {
+  return console.log('heloo');
+});
 
 server.use('/graphql', _bodyParser2.default.json(), (0, _graphqlServerExpress.graphqlExpress)({ schema: _schema2.default }));
 
 server.use('/graphiql', (0, _graphqlServerExpress.graphiqlExpress)({ endpointURL: '/graphql' }));
-
+//
 // Put all API endpoints under '/api'
 /* server.get('/api/passwords', (req, res) => {
   const count = 5;
@@ -59,7 +65,6 @@ server.use('/graphiql', (0, _graphqlServerExpress.graphiqlExpress)({ endpointURL
   res.sendFile(path.join(__dirname, '/client/build/index.html'));
 }); */
 
-var port = process.env.PORT || 5000;
-server.listen(port, function () {
-  return console.log('GraphQL Server is now running on http://localhost:' + port);
+server.listen(server.get('port'), function () {
+  return console.log('GraphQL Server is now running on http://localhost:' + server.get('port'));
 });
