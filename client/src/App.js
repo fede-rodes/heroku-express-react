@@ -16,6 +16,8 @@ const networkInterface = createNetworkInterface({
   uri: 'http://localhost:5000/graphql',
 });
 
+console.log(`PORT: ${process.env.PORT}`);
+
 networkInterface.use([{
   applyMiddleware(req, next) {
     setTimeout(next, 500);
